@@ -94,9 +94,7 @@ Stores color composition.
 ### 1️⃣ Extract
 - Fetches artifacts using:
   - `classification`
-  - `hasimage = 1`
-- Uses pagination (`size = 100`)
-- Collects **up to 2,500 records per classification**
+ - Collects **up to 2,500 records per classification**
 
 ### 2️⃣ Transform
 - Handles missing and inconsistent metadata  
@@ -188,52 +186,6 @@ All table views and analytics dynamically adapt to the selected classification.
 - Oldest Artifacts  
 
 ---
-
-## ⚠️ Why Some Queries Return No Results
-
-Some queries may return empty results due to **data reality**, not errors:
-
-- `culture`, `period`, and `century` are sparsely populated in the API  
-- `hasimage = 1` filter removes artifacts without media  
-- Certain cultures (e.g., Byzantine) rarely exist in some classifications (e.g., Prints)  
-
-This behavior is **expected and correct**.
-
----
-
-## 🗑️ Database Reset (Danger Zone)
-
-A protected database reset feature is provided:
-
-- Small **top-right “Reset DB” button**
-- Double confirmation required
-- Safe `TRUNCATE` order:
-  1. `artifact_colors`
-  2. `artifact_media`
-  3. `artifact_metadata`
-- Clears Streamlit session state
-- Automatically reloads the UI  
-
-This mimics **production-grade safety patterns**.
-
----
-
-## 🧠 Key Design Decisions
-
-- Persistent SQL storage (no auto-deletes)  
-- Classification-filtered views instead of separate tables  
-- Flexible SQL handling for inconsistent metadata  
-- Explicit handling of empty results  
-- Streamlit session-state management for stability  
-
----
-
-## 🎤 Viva / Interview One-Liner
-
-> *“This project implements an end-to-end ETL pipeline using a public museum API, normalizes the data into relational tables, and provides classification-aware analytics through an interactive Streamlit dashboard.”*
-
----
-
 ## 🚀 How to Run
 
 ```bash
